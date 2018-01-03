@@ -24,21 +24,18 @@ function safetify(cfg) {
 
 module.exports = function (cfg, opts) {
   const config = safetify(cfg)
-  const tsLintRule = {
-    test: /\.ts$/,
-    enforce: 'pre',
-    exclude: /(node_modules|deploy)/,
-    use: []
-  }
   const mainRule = {
     test: /\.ts$/,
     exclude: /(node_modules|deploy)/,
     use: []
   }
+  const tsLintRule = Object.assign({
+    enforce: 'pre'
+  }, mainRule)
   tsLintRule.use.push({
     loader: 'tslint-loader',
     options: {
-      typeCheck: true,
+      typeCheck: true
     }
   })
   mainRule.use.push({
@@ -46,7 +43,7 @@ module.exports = function (cfg, opts) {
   })
   config.module.rules.push(tsLintRule)
   config.module.rules.push(mainRule)
-  Array.from(['.ts']).forEach((i) => {
+  Array.from(['.ts', '.tsx', '.js']).forEach((i) => {
     config.resolve.extensions.push(i)
   })
   config.resolveLoader.modules.push(

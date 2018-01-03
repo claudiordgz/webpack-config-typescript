@@ -4,9 +4,9 @@ Life is to short to be copy pasting Webpack configurations that use Typescript a
 
 Sadly both will give hell every step of the way.
 
-This are the 3 ingredients you'll need to use this:
+These are the 3 ingredients you'll need to use this:
 
-1. - Make a webpack configuration with entry and output, such as:
+1. Make a webpack configuration with entry and output, such as:
 
 ```javascript
 const path = require('path')

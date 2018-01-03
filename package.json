@@ -1,0 +1,33 @@
+{
+  "name": "webpack-config-typescript",
+  "version": "0.0.1",
+  "description": "Reusable Webpack Config for Typescript",
+  "main": "index.js",
+  "dependencies": {
+    "ts-loader": "^3.2.0",
+    "tslint": "^5.8.0",
+    "tslint-config-standard": "^7.0.0",
+    "tslint-loader": "^3.5.3",
+    "typescript": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claudiordgz/webpack-config-typescript.git"
+  },
+  "keywords": [
+    "Typescript",
+    "TSLint",
+    "Webpack"
+  ],
+  "author": "claudiordgz <claudio.rdgz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudiordgz/webpack-config-typescript/issues"
+  },
+  "homepage": "https://github.com/claudiordgz/webpack-config-typescript#readme"
+}

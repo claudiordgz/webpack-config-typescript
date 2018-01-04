@@ -41,13 +41,13 @@ module.exports = function (cfg, opts) {
   mainRule.use.push({
     loader: 'ts-loader'
   })
-  config.module.rules.push(tsLintRule)
-  config.module.rules.push(mainRule)
+  config.module.rules.push(tsLintRule, mainRule)
   Array.from(['.ts', '.tsx', '.js']).forEach((i) => {
     config.resolve.extensions.push(i)
   })
   config.resolveLoader.modules.push(
-    path.join(__dirname, 'node_modules')
+    path.join(__dirname, 'node_modules'),
+    path.join(__dirname, '..')
   )
   if (opts && opts.uglify) {
     config.plugins.push(new UglifyJsPlugin())

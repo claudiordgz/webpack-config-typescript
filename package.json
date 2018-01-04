@@ -1,6 +1,6 @@
 {
   "name": "webpack-config-typescript",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Reusable Webpack Config for Typescript",
   "main": "index.js",
   "dependencies": {

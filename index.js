@@ -1,6 +1,9 @@
 const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+const webpack = require('webpack')
+const ignore = new webpack.IgnorePlugin(/^(webpack|path|uglifyjs-webpack-plugin)$/)
+
 function setDefaultValue(obj, value) {
 	return obj === undefined? value : obj
 }
@@ -52,5 +55,6 @@ module.exports = function (cfg, opts) {
   if (opts && opts.uglify) {
     config.plugins.push(new UglifyJsPlugin())
   }
+  config.plugins.push(ignore)
   return config
 }

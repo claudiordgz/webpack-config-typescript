@@ -1,3 +1,6 @@
+/* These tests are meant to test the generated bundle
+   Src Code in webpack-config-typescript/test/main.ts
+*/
 const lib = require('../bundle');
 
 test('adds 1 + 2 to equal 3', () => {

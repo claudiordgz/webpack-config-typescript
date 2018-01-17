@@ -1,4 +1,4 @@
-import { Configuration, NewModule, NewUseRule, NewLoader } from 'webpack'
+import { Configuration, NewModule, NewUseRule, NewLoader, Plugin, Resolve, ResolveLoader } from 'webpack'
 const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
@@ -15,39 +15,47 @@ function setDefaultValue (obj, value) {
   return obj === undefined ? value : obj
 }
 
-function safetify (cfg): Configuration {
-  const config: Configuration = Object.assign({}, cfg)
+interface NewConfiguration extends Configuration {
+  resolve: Resolve
+  module: NewModule
+  resolveLoader: ResolveLoader
+  plugins: Plugin[]
+}
 
+// Setup some defaults, similar to webpack-config-safetify
+function safetify (cfg): NewConfiguration {
+  const config: NewConfiguration = Object.assign({}, cfg)
+
+  /* Don't bundle path, fsevents, and so forth */
   config.target = 'node'
   config.externals = [nodeExternals()]
 
   config.resolve = setDefaultValue(config.resolve, {})
-  if (config.resolve) {
-    config.resolve.extensions = setDefaultValue(config.resolve.extensions, [])
-  }
+  config.resolve.extensions = setDefaultValue(config.resolve.extensions, [])
 
   config.module = setDefaultValue(config.module, {})
-  if (config.module) {
-    (config.module as NewModule).rules = setDefaultValue((config.module as NewModule).rules, [])
-  }
+  config.module.rules = setDefaultValue(config.module.rules, [])
 
   config.resolveLoader = setDefaultValue(config.resolveLoader, {})
-  if (config.resolveLoader) {
-    config.resolveLoader.modules = setDefaultValue(config.resolveLoader.modules, [])
-  }
+  config.resolveLoader.modules = setDefaultValue(config.resolveLoader.modules, [])
 
   config.plugins = setDefaultValue(config.plugins, [])
 
   return config
 }
 
-export function ts (cfg, opts) {
-  let config: Configuration = safetify(cfg)
+// Main lib, receives user's webpack config and adds typescript and tslint
+export function ts (cfg) {
+  let config: NewConfiguration = safetify(cfg)
+
+  // exclude some folders, like node_modules
   const mainRule: IRule = Object.assign({
     test: /\.ts$/,
     exclude: /(node_modules|deploy)/,
     use: []
   })
+
+  // tslint has to be executed before tsc
   const tsLintRule: ITSLintRule = Object.assign({
     enforce: 'pre'
   }, mainRule)
@@ -60,22 +68,24 @@ export function ts (cfg, opts) {
   mainRule.use.push({
     loader: 'ts-loader'
   })
-  if (config.module) {
-    (config.module as NewModule).rules.push(tsLintRule, mainRule)
-  }
+  config.module.rules.push(tsLintRule, mainRule)
+
   Array.from(['.ts', '.tsx', '.js']).forEach((i) => {
     if (config.resolve && config.resolve.extensions) {
       config.resolve.extensions.push(i)
     }
   })
+
+  // Current node_modules and root node_modules have to be included
   if (config.resolveLoader && config.resolveLoader.modules) {
     config.resolveLoader.modules.push(
       path.join(__dirname, 'node_modules'),
       path.join(process.cwd(), 'node_modules')
     )
   }
-  if (config.plugins) {
-    config.plugins.push(new UglifyJsPlugin())
-  }
+
+  // Uglify the output
+  config.plugins.push(new UglifyJsPlugin())
+
   return config
 }

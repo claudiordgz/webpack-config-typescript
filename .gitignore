@@ -61,3 +61,5 @@ build/bundle.js
 build/index.js
 
 .DS_Store
+
+index.backup.js

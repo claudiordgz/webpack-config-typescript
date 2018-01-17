@@ -1,12 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 
-console.log(JSON.stringify(process, null, 2))
-
 function copyConfig(configName) {
   const pathToConfig = path.join(__dirname, '../', configName)
 
-  const pathToNewConfigDir = path.dirname(process.argv[1])
+  const pathToNewConfigDir = path.dirname(process.cwd())
   const pathToNewConfig = path.join(pathToNewConfigDir, configName)
 
   console.info(`Copying ${pathToConfig} to => ${pathToNewConfig}`)

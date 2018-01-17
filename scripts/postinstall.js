@@ -1,14 +1,17 @@
 const path = require('path')
 const fs = require('fs')
 
-const pathToTSConfig = path.join(__dirname, '../', 'tsconfig.json')
-const pathToTSLintConfig = path.join(__dirname, '../', 'tslint.json')
+console.log(JSON.stringify(process, null, 2))
 
-const pathToNewTSConfig = path.join(process.cwd(), 'tsconfig.json')
-const pathToNewTSLintConfig = path.join(process.cwd(), 'tslint.json')
+function copyConfig(configName) {
+  const pathToConfig = path.join(__dirname, '../', configName)
 
-console.info(`Copying ${pathToTSConfig} to => ${pathToNewTSConfig}`)
-fs.createReadStream(pathToTSConfig).pipe(fs.createWriteStream(pathToNewTSConfig))
+  const pathToNewConfigDir = path.dirname(process.argv[1])
+  const pathToNewConfig = path.join(pathToNewConfigDir, configName)
 
-console.info(`Copying ${pathToTSLintConfig} to => ${pathToNewTSLintConfig}`)
-fs.createReadStream(pathToTSLintConfig).pipe(fs.createWriteStream(pathToNewTSLintConfig))
+  console.info(`Copying ${pathToConfig} to => ${pathToNewConfig}`)
+  fs.createReadStream(pathToConfig).pipe(fs.createWriteStream(pathToNewConfig))
+}
+
+copyConfig('tsconfig.json')
+copyConfig('tslint.json')

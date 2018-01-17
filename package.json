@@ -1,6 +1,6 @@
 {
   "name": "webpack-config-typescript",
-  "version": "0.0.5",
+  "version": "1.0.5",
   "description": "Reusable Webpack Config for Typescript",
   "main": "index.js",
   "dependencies": {
@@ -12,11 +12,16 @@
     "uglifyjs-webpack-plugin": "^1.1.4"
   },
   "devDependencies": {
-    "webpack": "^3.10.0"
+    "@types/webpack": "^3.8.2",
+    "jest": "^22.1.1",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
-    "test:build": "webpack --config test/webpack.test.js",
-    "test": "jest"
+    "build": "webpack",
+    "test:build": "webpack --config test/webpack.test-config.js",
+    "test:bundle": "jest",
+    "test": "npm run build && npm run test:build && npm run test:bundle"
   },
   "repository": {
     "type": "git",

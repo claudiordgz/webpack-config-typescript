@@ -2,6 +2,8 @@
 
 Life is to short to be copy pasting Webpack configurations that use Typescript and TSLint.
 
+Webpack config typescript is still in early stages of development and it's not meant to be used in production.
+
 Sadly both will give hell every step of the way.
 
 These are the 3 ingredients you'll need to use this:

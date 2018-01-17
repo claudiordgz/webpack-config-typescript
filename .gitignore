@@ -57,3 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 
+build/bundle.js
+build/index.js
+
+.DS_Store

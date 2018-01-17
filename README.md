@@ -1,69 +1,10 @@
 # webpack-config-typescript
 
-Life is to short to be copy pasting Webpack configurations that use Typescript and TSLint.
+> A Webpack 3 extender to include typescript configuration.
 
-Webpack config typescript is still in early stages of development and it's not meant to be used in production.
+This project was born of using TS on Lambda functions without copy-pasting a giant webpack configuration around. It is still in early stages of development.
 
-Sadly both will give hell every step of the way.
-
-These are the 3 ingredients you'll need to use this:
-
-1. Make a webpack configuration with entry and output, such as:
-
-```javascript
-const path = require('path')
-const cfg = require('webpack-config-typescript')
-
-let config = {
-  entry: path.join(__dirname, 'src/handler.ts'),
-  output: {
-    filename: 'deploy/handler.js',
-    libraryTarget: 'commonjs',
-    path: path.join(__dirname)
-  }
-}
-module.exports = cfg(config)
-
-```
-
-2. Make a `tsconfig.json`, such as:
-
-```json
-{
-  "compilerOptions": {
-    "target": "es2015",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": false,
-    "strict": true
-  }
-}
-```
-
-3. Make a `tslint.json`, such as:
-
-```json
-{
-  "extends": ["tslint-config-standard"],
-  "linterOptions": {
-    "exclude": [
-      "**/node_modules",
-      "**/deploy"
-    ]
-  },
-  "rules": {
-    "await-promise": false,
-    "no-unused-variable": false
-  }
-}
-```
-
-Why?
-
-Because is not exactly *simple* to put it in a different folder.
+It will copy a very opinionated `tsconfig.json` and `tslint.json` into your project in order for you to customize to your liking. I'd rather have a generated of each than extending a base one.
 
 ## License
 

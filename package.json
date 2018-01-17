@@ -1,6 +1,6 @@
 {
   "name": "webpack-config-typescript",
-  "version": "1.0.5",
+  "version": "1.0.1",
   "description": "Reusable Webpack Config for Typescript",
   "main": "index.js",
   "dependencies": {
@@ -21,7 +21,9 @@
     "build": "webpack",
     "test:build": "cp index.js index.backup.js && webpack --config test/webpack.test-config.js",
     "test:bundle": "jest",
-    "test": "npm run build && npm run test:build && npm run test:bundle"
+    "test": "npm run build && npm run test:build && npm run test:bundle",
+    "postinstall": "node scripts/postinstall.js",
+    "postuninstall": "node scripts/postuninstall.js"
   },
   "repository": {
     "type": "git",

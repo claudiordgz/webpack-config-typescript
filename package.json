@@ -4,18 +4,21 @@
   "description": "Reusable Webpack Config for Typescript",
   "main": "index.js",
   "dependencies": {
-    "ts-loader": "^3.2.0",
-    "tslint": "^5.8.0",
+    "ts-loader": "3.5.0",
+    "tslint": "5.9.1",
     "tslint-config-standard": "^7.0.0",
     "tslint-loader": "github:wbuchwalter/tslint-loader#093230076f3b453c4f8b7aa2ee074932aa109e84",
-    "typescript": "^2.6.2",
-    "uglifyjs-webpack-plugin": "^1.1.4",
-    "webpack-node-externals": "^1.6.0"
+    "typescript": "2.7.2",
+    "uglifyjs-webpack-plugin": "1.1.4",
+    "webpack-node-externals": "1.6.0"
   },
   "devDependencies": {
-    "@types/webpack": "^3.8.2",
+    "@types/webpack": "^3.8.8",
+    "cache-loader": "^1.2.0",
+    "fork-ts-checker-webpack-plugin": "^0.3.0",
     "jest": "^22.1.1",
-    "webpack": "^3.10.0"
+    "thread-loader": "^1.1.2",
+    "webpack": "3.11.0"
   },
   "scripts": {
     "build": "webpack",

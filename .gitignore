@@ -63,3 +63,5 @@ build/index.js
 .DS_Store
 
 index.backup.js
+
+.cache-loader

@@ -1,7 +1,7 @@
 import { Configuration, NewModule, NewUseRule, NewLoader, Plugin, Resolve, ResolveLoader } from 'webpack'
 const path = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 interface IRule extends NewUseRule {
   use: NewLoader[]
@@ -65,8 +65,18 @@ export function ts (cfg) {
       typeCheck: true
     }
   })
+  mainRule.use.push({ loader: 'cache-loader' })
   mainRule.use.push({
-    loader: 'ts-loader'
+    loader: 'thread-loader',
+    options: {
+      workers: require('os').cpus().length - 1
+    }
+  })
+  mainRule.use.push({
+    loader: 'ts-loader',
+    options: {
+      happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+    }
   })
   config.module.rules.push(tsLintRule, mainRule)
 
@@ -84,8 +94,7 @@ export function ts (cfg) {
     )
   }
 
-  // Uglify the output
-  config.plugins.push(new UglifyJsPlugin())
+  config.plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }))
 
   return config
 }

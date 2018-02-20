@@ -1,1 +1,173 @@
-!function(e,o){if("object"==typeof exports&&"object"==typeof module)module.exports=o();else if("function"==typeof define&&define.amd)define([],o);else{var r=o();for(var n in r)("object"==typeof exports?exports:e)[n]=r[n]}}("undefined"!=typeof self?self:this,function(){return function(e){var o={};function r(n){if(o[n])return o[n].exports;var s=o[n]={i:n,l:!1,exports:{}};return e[n].call(s.exports,s,s.exports,r),s.l=!0,s.exports}return r.m=e,r.c=o,r.d=function(e,o,n){r.o(e,o)||Object.defineProperty(e,o,{configurable:!1,enumerable:!0,get:n})},r.n=function(e){var o=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(o,"a",o),o},r.o=function(e,o){return Object.prototype.hasOwnProperty.call(e,o)},r.p="",r(r.s=0)}([function(e,o,r){"use strict";(function(e){Object.defineProperty(o,"__esModule",{value:!0});const n=r(1),s=r(2),t=r(3);function u(e,o){return void 0===e?o:e}o.ts=function(o){let r=function(e){const o=Object.assign({},e);return o.target="node",o.externals=[t()],o.resolve=u(o.resolve,{}),o.resolve.extensions=u(o.resolve.extensions,[]),o.module=u(o.module,{}),o.module.rules=u(o.module.rules,[]),o.resolveLoader=u(o.resolveLoader,{}),o.resolveLoader.modules=u(o.resolveLoader.modules,[]),o.plugins=u(o.plugins,[]),o}(o);const l=Object.assign({test:/\.ts$/,exclude:/(node_modules|deploy)/,use:[]}),i=Object.assign({enforce:"pre"},l);return i.use.push({loader:"tslint-loader",options:{typeCheck:!0}}),l.use.push({loader:"ts-loader"}),r.module.rules.push(i,l),Array.from([".ts",".tsx",".js"]).forEach(e=>{r.resolve&&r.resolve.extensions&&r.resolve.extensions.push(e)}),r.resolveLoader&&r.resolveLoader.modules&&r.resolveLoader.modules.push(n.join(e,"node_modules"),n.join(process.cwd(),"node_modules")),r.plugins.push(new s),r}}).call(o,"/")},function(e,o){e.exports=require("path")},function(e,o){e.exports=require("uglifyjs-webpack-plugin")},function(e,o){e.exports=require("webpack-node-externals")}])});
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const path = __webpack_require__(1);
+const nodeExternals = __webpack_require__(2);
+const ForkTsCheckerWebpackPlugin = __webpack_require__(3);
+function setDefaultValue(obj, value) {
+    return obj === undefined ? value : obj;
+}
+function safetify(cfg) {
+    const config = Object.assign({}, cfg);
+    config.target = 'node';
+    config.externals = [nodeExternals()];
+    config.resolve = setDefaultValue(config.resolve, {});
+    config.resolve.extensions = setDefaultValue(config.resolve.extensions, []);
+    config.module = setDefaultValue(config.module, {});
+    config.module.rules = setDefaultValue(config.module.rules, []);
+    config.resolveLoader = setDefaultValue(config.resolveLoader, {});
+    config.resolveLoader.modules = setDefaultValue(config.resolveLoader.modules, []);
+    config.plugins = setDefaultValue(config.plugins, []);
+    return config;
+}
+function ts(cfg) {
+    let config = safetify(cfg);
+    const mainRule = Object.assign({
+        test: /\.ts$/,
+        exclude: /(node_modules|deploy)/,
+        use: []
+    });
+    const tsLintRule = Object.assign({
+        enforce: 'pre'
+    }, mainRule);
+    tsLintRule.use.push({
+        loader: 'tslint-loader',
+        options: {
+            typeCheck: true
+        }
+    });
+    mainRule.use.push({ loader: 'cache-loader' });
+    mainRule.use.push({
+        loader: 'thread-loader',
+        options: {
+            workers: __webpack_require__(4).cpus().length - 1
+        }
+    });
+    mainRule.use.push({
+        loader: 'ts-loader',
+        options: {
+            happyPackMode: true
+        }
+    });
+    config.module.rules.push(tsLintRule, mainRule);
+    Array.from(['.ts', '.tsx', '.js']).forEach((i) => {
+        if (config.resolve && config.resolve.extensions) {
+            config.resolve.extensions.push(i);
+        }
+    });
+    if (config.resolveLoader && config.resolveLoader.modules) {
+        config.resolveLoader.modules.push(path.join(__dirname, 'node_modules'), path.join(process.cwd(), 'node_modules'));
+    }
+    config.plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }));
+    return config;
+}
+exports.ts = ts;
+
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("webpack-node-externals");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("fork-ts-checker-webpack-plugin");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("os");
+
+/***/ })
+/******/ ]);
+});

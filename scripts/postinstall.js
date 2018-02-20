@@ -7,8 +7,10 @@ function copyConfig(configName) {
   const pathToNewConfigDir = path.dirname(process.cwd())
   const pathToNewConfig = path.join(pathToNewConfigDir, '../', configName)
 
-  console.info(`Copying ${pathToConfig} to => ${pathToNewConfig}`)
-  fs.createReadStream(pathToConfig).pipe(fs.createWriteStream(pathToNewConfig))
+  if (!fs.existsSync(pathToNewConfig)) {
+    console.info(`Copying ${pathToConfig} to => ${pathToNewConfig}`)
+    fs.createReadStream(pathToConfig).pipe(fs.createWriteStream(pathToNewConfig))
+  }
 }
 
 copyConfig('tsconfig.json')

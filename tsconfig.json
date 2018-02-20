@@ -6,11 +6,11 @@
     "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "strict": true
   },
   "exclude": [
-		"**/*.test.ts",
+		"tests",
 		"node_modules"
 	]
 }

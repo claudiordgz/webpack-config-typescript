@@ -1,6 +1,5 @@
 import { Configuration, NewModule, NewUseRule, NewLoader, Plugin, Resolve, ResolveLoader } from 'webpack'
 const path = require('path')
-const nodeExternals = require('webpack-node-externals')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 interface IRule extends NewUseRule {
@@ -28,7 +27,6 @@ function safetify (cfg): NewConfiguration {
 
   /* Don't bundle path, fsevents, and so forth */
   config.target = 'node'
-  config.externals = [nodeExternals()]
 
   config.resolve = setDefaultValue(config.resolve, {})
   config.resolve.extensions = setDefaultValue(config.resolve.extensions, [])

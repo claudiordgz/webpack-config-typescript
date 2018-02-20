@@ -81,15 +81,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = __webpack_require__(1);
-const nodeExternals = __webpack_require__(2);
-const ForkTsCheckerWebpackPlugin = __webpack_require__(3);
+const ForkTsCheckerWebpackPlugin = __webpack_require__(2);
 function setDefaultValue(obj, value) {
     return obj === undefined ? value : obj;
 }
 function safetify(cfg) {
     const config = Object.assign({}, cfg);
     config.target = 'node';
-    config.externals = [nodeExternals()];
     config.resolve = setDefaultValue(config.resolve, {});
     config.resolve.extensions = setDefaultValue(config.resolve.extensions, []);
     config.module = setDefaultValue(config.module, {});
@@ -119,7 +117,7 @@ function ts(cfg) {
     mainRule.use.push({
         loader: 'thread-loader',
         options: {
-            workers: __webpack_require__(4).cpus().length - 1
+            workers: __webpack_require__(3).cpus().length - 1
         }
     });
     mainRule.use.push({
@@ -154,16 +152,10 @@ module.exports = require("path");
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = require("webpack-node-externals");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
 module.exports = require("fork-ts-checker-webpack-plugin");
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = require("os");

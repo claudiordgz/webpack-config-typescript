@@ -1,13 +1,13 @@
 {
   "name": "webpack-config-typescript",
-  "version": "1.0.8",
+  "version": "4.0.0",
   "description": "Reusable Webpack Config for Typescript",
   "main": "index.js",
   "dependencies": {
     "ts-loader": "3.5.0",
     "tslint": "5.9.1",
     "tslint-config-standard": "^7.0.0",
-    "tslint-loader": "github:wbuchwalter/tslint-loader#093230076f3b453c4f8b7aa2ee074932aa109e84",
+    "tslint-loader": "3.6.0",
     "typescript": "2.7.2",
     "uglifyjs-webpack-plugin": "1.1.4",
     "webpack-node-externals": "1.6.0",
@@ -18,10 +18,11 @@
   "devDependencies": {
     "@types/webpack": "^3.8.8",
     "jest": "^22.1.1",
-    "webpack": "3.11.0"
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode production",
     "test:build": "cp index.js index.backup.js && webpack --config test/webpack.test-config.js",
     "test:bundle": "jest",
     "test": "npm run build && npm run test:build && npm run test:bundle",

@@ -1,13 +1,12 @@
-import { Configuration, NewModule, NewUseRule, NewLoader, Plugin, Resolve, ResolveLoader } from 'webpack'
+import { Configuration, NewModule, NewUseRule, NewLoader, Resolve, ResolveLoader } from 'webpack'
 const path = require('path')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 interface IRule extends NewUseRule {
   use: NewLoader[]
 }
 
 interface ITSLintRule extends IRule {
-  enforce: 'pre' | 'post' | undefined
+  enforce: string | undefined
 }
 
 function setDefaultValue (obj, value) {
@@ -17,6 +16,7 @@ function setDefaultValue (obj, value) {
 interface NewConfiguration extends Configuration {
   resolve: Resolve
   module: NewModule
+  target: string
   resolveLoader: ResolveLoader
   plugins: Plugin[]
 }
@@ -91,8 +91,6 @@ export function ts (cfg) {
       path.join(process.cwd(), 'node_modules')
     )
   }
-
-  config.plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }))
 
   return config
 }

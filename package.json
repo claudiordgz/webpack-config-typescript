@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "test:build": "cp index.js index.backup.js && webpack --config test/webpack.test-config.js",
+    "test:build": "cp index.js index.backup.js && webpack --mode production --config test/webpack.test-config.js",
     "test:bundle": "jest",
     "test": "npm run build && npm run test:build && npm run test:bundle",
     "postinstall": "node scripts/postinstall.js",

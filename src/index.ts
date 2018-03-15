@@ -1,12 +1,9 @@
-import { Configuration, NewModule, NewUseRule, NewLoader, Resolve, ResolveLoader } from 'webpack'
+import { Configuration, NewModule, NewUseRule, NewLoader, Plugin, Resolve, ResolveLoader } from 'webpack'
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const path = require('path')
 
 interface IRule extends NewUseRule {
   use: NewLoader[]
-}
-
-interface ITSLintRule extends IRule {
-  enforce: string | undefined
 }
 
 function setDefaultValue (obj, value) {
@@ -16,9 +13,9 @@ function setDefaultValue (obj, value) {
 interface NewConfiguration extends Configuration {
   resolve: Resolve
   module: NewModule
-  target: string
+  target?: 'web' | 'webworker' | 'node' | 'async-node' | 'node-webkit' | 'atom' | 'electron' | 'electron-renderer' | 'electron-main' | ((compiler?: any) => void)
   resolveLoader: ResolveLoader
-  plugins: Plugin[]
+  plugins?: Plugin[]
 }
 
 // Setup some defaults, similar to webpack-config-safetify
@@ -47,36 +44,22 @@ export function ts (cfg) {
   let config: NewConfiguration = safetify(cfg)
 
   // exclude some folders, like node_modules
-  const mainRule: IRule = Object.assign({
+  const mainRule: IRule = {
     test: /\.ts$/,
     exclude: /(node_modules|deploy)/,
     use: []
-  })
+  }
 
-  // tslint has to be executed before tsc
-  const tsLintRule: ITSLintRule = Object.assign({
-    enforce: 'pre'
-  }, mainRule)
-  tsLintRule.use.push({
+  mainRule.use.push({
     loader: 'tslint-loader',
     options: {
       typeCheck: true
     }
   })
-  mainRule.use.push({ loader: 'cache-loader' })
   mainRule.use.push({
-    loader: 'thread-loader',
-    options: {
-      workers: require('os').cpus().length - 1
-    }
+    loader: 'ts-loader'
   })
-  mainRule.use.push({
-    loader: 'ts-loader',
-    options: {
-      happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
-    }
-  })
-  config.module.rules.push(tsLintRule, mainRule)
+  config.module.rules.push(mainRule)
 
   Array.from(['.ts', '.tsx', '.js']).forEach((i) => {
     if (config.resolve && config.resolve.extensions) {
@@ -90,6 +73,12 @@ export function ts (cfg) {
       path.join(__dirname, 'node_modules'),
       path.join(process.cwd(), 'node_modules')
     )
+  }
+  config.externals = {
+    'fork-ts-checker-webpack-plugin': 'fork-ts-checker-webpack-plugin'
+  }
+  if (config.plugins) {
+    config.plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }))
   }
 
   return config

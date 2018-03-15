@@ -1,19 +1,16 @@
 {
   "name": "webpack-config-typescript",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Reusable Webpack Config for Typescript",
   "main": "index.js",
   "dependencies": {
-    "ts-loader": "3.5.0",
+    "ts-loader": "4.0.1",
     "tslint": "5.9.1",
     "tslint-config-standard": "^7.0.0",
     "tslint-loader": "3.6.0",
     "typescript": "2.7.2",
     "uglifyjs-webpack-plugin": "1.1.4",
-    "webpack-node-externals": "1.6.0",
-    "cache-loader": "^1.2.0",
-    "fork-ts-checker-webpack-plugin": "^0.3.0",
-    "thread-loader": "^1.1.2"
+    "fork-ts-checker-webpack-plugin": "0.4.1"
   },
   "devDependencies": {
     "@types/webpack": "^3.8.8",
@@ -22,8 +19,8 @@
     "webpack-cli": "^2.0.12"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "test:build": "cp index.js index.backup.js && webpack --mode production --config test/webpack.test-config.js",
+    "build": "webpack --mode development",
+    "test:build": "cp index.js index.backup.js && webpack --mode development --config test/webpack.test-config.js",
     "test:bundle": "jest",
     "test": "npm run build && npm run test:build && npm run test:bundle",
     "postinstall": "node scripts/postinstall.js",

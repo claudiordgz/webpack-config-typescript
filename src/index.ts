@@ -61,7 +61,7 @@ export function ts (cfg) {
   })
   config.module.rules.push(mainRule)
 
-  Array.from(['.ts', '.tsx', '.js']).forEach((i) => {
+  Array.from(['.js', '.ts', '.tsx']).forEach((i) => {
     if (config.resolve && config.resolve.extensions) {
       config.resolve.extensions.push(i)
     }

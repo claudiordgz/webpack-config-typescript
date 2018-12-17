@@ -1,8 +1,8 @@
-import { Configuration, NewModule, NewUseRule, NewLoader, Plugin, Resolve, ResolveLoader } from 'webpack'
+import { Configuration, Module, RuleSetRule, NewLoader, Plugin, Resolve, ResolveLoader } from 'webpack'
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const path = require('path')
 
-interface IRule extends NewUseRule {
+interface IRule extends RuleSetRule {
   use: NewLoader[]
 }
 
@@ -12,7 +12,7 @@ function setDefaultValue (obj, value) {
 
 interface NewConfiguration extends Configuration {
   resolve: Resolve
-  module: NewModule
+  module: Module
   target?: 'web' | 'webworker' | 'node' | 'async-node' | 'node-webkit' | 'atom' | 'electron' | 'electron-renderer' | 'electron-main' | ((compiler?: any) => void)
   resolveLoader: ResolveLoader
   plugins?: Plugin[]

@@ -1,12 +1,10 @@
 # webpack-config-typescript
 
-> A Webpack 4 extender to include typescript configuration.
+Write as little webpack configuration needed to bundle Lambda functions written in TypeScript.
 
-## GOAL
+## Usage
 
-To write as little webpack configuration needed to bundle lambda functions.
-
-  1. Install
+  1. Install. This will add a barebones `tsconfig` and `tslingt` file into your root folder.
 ```
 $ npm i webpack-config-typescript -D
 $ nano webpack.config.js
@@ -32,13 +30,8 @@ config = webpackTs.ts(config) // <- Here is where it gets configured
 module.exports = config 
 ```
 
-  3. 
-
-It will copy a very opinionated `tsconfig.json` and `tslint.json` into your project in order for you to customize to your liking. I'd rather have a generated of each than extending a base one.
-
-# How to use
-
-
+  3. `webpack`
+  4. Your src should now be linted, transpiled, and bundled
 
 ## License
 

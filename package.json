@@ -1,21 +1,22 @@
 {
   "name": "webpack-config-typescript",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Reusable Webpack Config for Typescript",
   "main": "index.js",
   "dependencies": {
-    "ts-loader": "4.4.2",
+    "ts-loader": "5.3.1",
     "tslint": "5.10.0",
-    "tslint-config-standard": "^7.1.0",
-    "tslint-loader": "3.6.0",
-    "typescript": "2.9.2",
-    "fork-ts-checker-webpack-plugin": "0.4.2"
+    "tslint-config-standard": "8.0.1",
+    "tslint-loader": "3.5.4",
+    "typescript": "3.2.2",
+    "fork-ts-checker-webpack-plugin": "0.5.2"
   },
   "devDependencies": {
-    "@types/webpack": "^3.8.8",
-    "jest": "^22.1.1",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "@types/node": "10.12.15",
+    "@types/webpack": "4.4.21",
+    "jest": "23.6.0",
+    "webpack": "4.27.1",
+    "webpack-cli": "3.1.2"
   },
   "scripts": {
     "build": "webpack --mode development",

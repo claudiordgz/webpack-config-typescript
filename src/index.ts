@@ -6,11 +6,12 @@ interface IRule extends RuleSetRule {
   use: NewLoader[]
 }
 
-function setDefaultValue (obj, value) {
+function setDefaultValue (obj: any, value: {} | []) {
   return obj === undefined ? value : obj
 }
 
 interface NewConfiguration extends Configuration {
+  mode?: 'production' | 'development'
   resolve: Resolve
   module: Module
   target?: 'web' | 'webworker' | 'node' | 'async-node' | 'node-webkit' | 'atom' | 'electron' | 'electron-renderer' | 'electron-main' | ((compiler?: any) => void)
@@ -19,7 +20,7 @@ interface NewConfiguration extends Configuration {
 }
 
 // Setup some defaults, similar to webpack-config-safetify
-function safetify (cfg): NewConfiguration {
+function safetify (cfg: any): NewConfiguration {
   const config: NewConfiguration = Object.assign({}, cfg)
 
   /* Don't bundle path, fsevents, and so forth */
@@ -36,11 +37,15 @@ function safetify (cfg): NewConfiguration {
 
   config.plugins = setDefaultValue(config.plugins, [])
 
+  if (!('mode' in config)) {
+    config.mode = 'development'
+  }
+
   return config
 }
 
 // Main lib, receives user's webpack config and adds typescript and tslint
-export function ts (cfg) {
+export function ts (cfg: any) {
   let config: NewConfiguration = safetify(cfg)
 
   // exclude some folders, like node_modules

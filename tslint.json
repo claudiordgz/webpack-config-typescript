@@ -3,11 +3,13 @@
   "linterOptions": {
     "exclude": [
       "**/node_modules",
-      "**/deploy"
+      "**/deploy",
+      "**/dist",
+      "**/bin",
+      "*.json"
     ]
   },
   "rules": {
-    "await-promise": false,
-    "no-unused-variable": true
+    "await-promise": false
   }
 }

@@ -2,30 +2,43 @@
 
 > A Webpack 4 extender to include typescript configuration.
 
-This project was born of using TS on Lambda functions without copy-pasting a giant webpack configuration around. It is still in early stages of development.
+## GOAL
 
-It will copy a very opinionated `tsconfig.json` and `tslint.json` into your project in order for you to customize to your liking. I'd rather have a generated of each than extending a base one.
+To write as little webpack configuration needed to bundle lambda functions.
 
-# How to use
+  1. Install
+```
+$ npm i webpack-config-typescript -D
+$ nano webpack.config.js
+```
 
+  2. Wrap your webpack configuration using the exported function
 ```javascript
 const path = require('path')
 const webpackTs = require('webpack-config-typescript')
 
 let config = {
   entry: path.join(__dirname, 'src/handler.ts'), // <- your entry file
-  target: 'node', // <- In case you're making lambda code, remove if not
+  target: 'node', // <- For Lambdas
   output: {
     filename: 'deploy/handler.js', // <- output file
-    libraryTarget: 'commonjs', // <- output library type
+    libraryTarget: 'commonjs2', // <- output library type
     path: path.join(__dirname)
   }
 }
 
-config = webpackTs.ts(config) // <- this will add the ts-loader and tslint-loader
+config = webpackTs.ts(config) // <- Here is where it gets configured
 
 module.exports = config 
 ```
+
+  3. 
+
+It will copy a very opinionated `tsconfig.json` and `tslint.json` into your project in order for you to customize to your liking. I'd rather have a generated of each than extending a base one.
+
+# How to use
+
+
 
 ## License
 

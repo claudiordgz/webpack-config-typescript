@@ -1,4 +1,5 @@
-export function helloWorld (something) {
+
+export function helloWorld (something: string) {
   return `Hello there ${something}`
 }
 
